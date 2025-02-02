@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        .container {
+            padding: 20px;
+            background: #ffffff;
+            width: 400px;
+            min-height: 300px;
+            max-height: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            border-radius: 8px;
+            border: 1px solid transparent;
+            padding: 0.6em 1.2em;
+            font-size: 1em;
+            font-weight: 500;
+            font-family: inherit;
+            background-color: #1a1a1a;
+            cursor: pointer;
+            transition: border-color 0.25s;
+        }
+        #add-button{
+            background-color: rgb(82, 82, 234);
+            color: white;
+        }
+        #remove-button{
+            background-color: red;
+            border-radius: 45%;
+            border: none;
+            padding: 3px;
+            width: 30px;
+            height: 30px;
+            color: white;
+        }
+        li{
+            justify-content: space-between;
+            display: flex;
+            border-bottom: solid 2px black;
+            padding: 15px; 
+        }
+        ul{
+            padding: 0;
+            border: 10%;
+        }
+        input{
+            padding: 0.6em 1.2em;
+            font-size: 1em;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: rgb(66, 65, 65);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>
+            To-Do List
+        </h2>
+        <div style="justify-items: center;align-items: center;">
+            <input type="text" id="input" placeholder="Enter task:"></input>
+            <button id="add-button" onclick="addTask()">Add</button>
+        </div>
+        <ul id="list"></ul>
+    </div>
+    <script>
+        function addTask(){
+            let taskInput = document.getElementById("input");
+            let taskList = document.getElementById("list");
+            let li = document.createElement("li");
+
+            if (taskInput.value === ""){
+                alert("Enter Task");
+                return;
+            }
+            li.innerHTML = `<span onclick="completedTask(this)">${taskInput.value}</span> <button id="remove-button" onclick="removeTask(this)">X</button>`;
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+        function removeTask(button){
+            button.parentElement.remove();
+        }
+        function completedTask(span){
+            span.classList.toggle("completed")
+        }
+    </script>
+</body>
+</html>
